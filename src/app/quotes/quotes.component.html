@@ -1,0 +1,25 @@
+<div class="container">
+    <h1 class="text-center">Quote Ranker</h1>
+    <hr>
+  
+    <div class="row">
+        <div class="col-md-6">
+            <div *ngFor = 'let quotes of quote; let i=index' class="mb-5">
+                <div>
+                    <p>"{{quotes.quote}}"  - <span>{{quotes.author}}</span></p>
+                    <button (click) = 'toggleDetails(i)' class="btn btn-secondary mb-2">More...</button><br>
+                    <button class="btn btn-outline-info mr-1" (click)="upvoteQ(quotes)">Upvote: {{quotes.upvote}}</button>
+                    <button class="btn btn-outline-info mr-2"(click)="downvoteQ(quotes)">Downvote: {{quotes.downvote}}</button>
+                    <button class="btn btn-dark" (click) ="reset(quotes)">Reset</button>
+                </div>
+                <div *ngIf = 'quotes.showAuthor'>
+                    <app-quote-details [quotes] = 'quotes' (isComplete) = 'deleteQuote($event,i)'></app-quote-details>
+                  </div>
+            </div>
+            
+        </div>
+      <div class="col-md-6">
+        <app-quotes-form (addQuote) = "addNewQuote($event)"></app-quotes-form>
+      </div>
+    </div>
+  </div>
